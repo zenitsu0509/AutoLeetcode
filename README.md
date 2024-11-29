@@ -82,10 +82,6 @@ If you'd like to contribute to this project, feel free to open a pull request! Y
 - Suggest new features
 - Improve the documentation
 
-## License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
 ## Acknowledgments
 
 - [Selenium](https://www.selenium.dev/) for browser automation.
