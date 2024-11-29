@@ -16,8 +16,8 @@ This Python automation project helps you to complete your daily LeetCode challen
 Before you run this project, ensure you have the following installed:
 
 - Python 3.x
-- Chrome or Firefox browser (depending on your configuration)
-- ChromeDriver or GeckoDriver (depending on the browser you are using)
+- Chrome or Edge browser (depending on your configuration)
+- ChromeDriver or MicrosoftedgeDriver (depending on the browser you are using)
 
 ### Python Libraries
 
