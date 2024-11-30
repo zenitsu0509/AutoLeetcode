@@ -1,4 +1,4 @@
 @echo off
-pythonw.exe "<path_of_the clone_directory>\automatedLeetcode\main.py"
+REM Execute Python script with unbuffered output
+python -u "<path_to_the_scriptFolder>\main.py"
 exit
-

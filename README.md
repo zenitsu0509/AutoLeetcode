@@ -18,7 +18,8 @@ pip install -r requirements.txt
 After cloning the repo apply these changes to `leetcode.bat` file
 ```leetcode.bat
 @echo off
-pythonw.exe "<path_of_the clone_directory>\automatedLeetcode\main.py"
+REM Execute Python script with unbuffered output
+python -u "<path_to_the_scriptFolder>\main.py"
 exit
 ```
 after applying the changes paste the `BAT` file at 
