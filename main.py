@@ -12,17 +12,16 @@ file = "date.json"
 date = datetime.date.today().isoformat()
 chromeCred = f"C:\\Users\\{os.getlogin()}\\AppData\\Local\\Google\\Chrome\\User Data"
 
-with open(file, "+a") as f:
+
+
+with open(file, "a+") as f:
     f.seek(0)
+    time.sleep(10)
     try:
         data = json.load(f)
     except json.JSONDecodeError:
         data = {}
     if date not in data:
-        data[date] = "solved"
-        f.seek(0)
-        json.dump(data, f, indent=4)
-        f.truncate()
         # giving initial data to the browser driver . . .
         chromeOpt = Options()
         chromeOpt.add_argument(f"--user-data-dir={chromeCred}")
@@ -115,10 +114,12 @@ with open(file, "+a") as f:
                 ec.element_to_be_clickable((By.XPATH,"/html/body/div[1]/div[2]/div/div/div[3]/div/div/div[1]/div/div/div[2]/div/div[2]/div/div[3]/div[3]/div/button"))
             )
             submit.click()
-            # back to the qns Url . . .
-            # making driver open till the manual keybord intruuption . . .
-
-            time.sleep(60)
+            # saving the data to json file . . .
+            data[date] = "solved"
+            f.seek(0)
+            json.dump(data, f, indent=4)
+            f.truncate()
+            time.sleep(30)
             driver.quit()
         except Exception as e:
             print(f"Error: {e}")
