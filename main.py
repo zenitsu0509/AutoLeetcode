@@ -90,6 +90,7 @@ def main():
             except Exception as e:
                 retries -= 1
                 time.sleep(2)
+        # getting list of all solutions . . .
         soup = BeautifulSoup(content, "html.parser")
         iFrames = soup.find_all("iframe")
         iFrame = []
