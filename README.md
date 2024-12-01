@@ -16,7 +16,7 @@ pip install -r requirements.txt
 ```
 ## Change BAT file
 After cloning the repo apply these changes to `leetcode.bat` file
-```leetcode.bat
+```bat
 @echo off
 REM Execute Python script with unbuffered output
 python -u "<path_to_the_scriptFolder>\main.py"
