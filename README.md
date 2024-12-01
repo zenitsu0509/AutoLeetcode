@@ -95,7 +95,7 @@ copyBtn.click()
 ```
 ## 5. **Submit Code**
 After getting everything it just simply copy paste the code 😂 most of us do it manually. So I just automated the task, so that everyone focus on devlopment part rather than wasting our some `minutes` on this. This script harldy took `40sec` to execute. While the script is doing it's work u can do yours.
----
+
 # Information
 ## Features
 
