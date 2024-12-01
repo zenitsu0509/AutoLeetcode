@@ -32,7 +32,7 @@ This section explains the key components of the **AutoLeetcode** script. It prov
 ## 2. **Browser Setup**
 Here as browser we have two options `Chrome` as deafault and `Edge` as secondary choice. Both browser proceeds with the browser information from the system.
 ### 2. **Chrome**
-```pyhton
+```python
 def chromeBrowser():
    options = Options()
    dataDir = os.path.join(os.environ["LOCALAPPDATA"], "Google", "Chrome", "User Data")
