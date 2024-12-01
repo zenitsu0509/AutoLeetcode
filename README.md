@@ -3,7 +3,7 @@
 This Python automation project helps you to complete your daily LeetCode challenges automatically and maintain your streak. The script utilizes `Selenium` for web automation and `BeautifulSoup` for scraping the necessary data. With this tool, you can easily stay on top of your daily practice and never miss a challenge!
 
 ![LeetCode Progress Image](https://preview.redd.it/what-ive-learned-from-7-months-of-leetcode-v0-od4xo623frzd1.png?width=834&format=png&auto=webp&s=49e4c3d1e11728f078d56f7f1e9af25ba6373b59)
----
+
 # SETUP
 ## Cloning Repo
 ```bash
@@ -25,7 +25,7 @@ exit
 after applying the changes paste the `BAT` file at 
 `C:\Users\<YourUsername>\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup`.
 Now the script is ready to run automatically when the system turns on.
----
+
 # Code Explaination
 ## 1. **Overview**
 This section explains the key components of the **AutoLeetcode** script. It provides a breakdown of the different functions and how they interact to automate the process of solving and submitting the "Question of the Day."
