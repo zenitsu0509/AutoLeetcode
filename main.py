@@ -13,12 +13,24 @@ from selenium.webdriver.common.action_chains import ActionChains
 
 
 # Setting browser driver and data
-def setBrowser():
+def chromeBrowser():
     options = Options()
     dataDir = os.path.join(os.environ["LOCALAPPDATA"], "Google", "Chrome", "User Data")
     options.add_argument(f"--user-data-dir={dataDir}")
     options.add_argument("--profile-directory=Default")
     return webdriver.Chrome(options=options)
+def edgeBrowser():
+    options = Options()
+    options.add_argument("--disable-dev-shm-usage")
+    options.add_argument("--no-sandbox")
+    options.add_argument("--disable-gpu")
+    # Enable verbose logging for debugging
+    options.add_argument("--enable-logging")
+    options.add_argument("--v=1")
+    options.binary_location = r"C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe"
+    driver_path = r"C:\path\to\msedgedriver.exe"
+    return webdriver.Edge(executable_path=driver_path, options=options)
+
 # Data management
 def dataManagement(file, date, status=None):
     try:
@@ -42,7 +54,7 @@ def main():
     dateData = dataManagement(file, date)
     if dateData is None:
         return
-    driver = setBrowser()
+    driver = chromeBrowser()
     try:
         # setting the link
         driver.get("https://leetcode.com/problemset/")
