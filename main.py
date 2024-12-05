@@ -10,8 +10,6 @@ from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as ec
 from selenium.webdriver.common.action_chains import ActionChains
-
-
 # Setting browser driver and data
 def chromeBrowser():
     options = Options()
@@ -30,7 +28,6 @@ def edgeBrowser():
     options.binary_location = r"C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe"
     driver_path = r"C:\path\to\msedgedriver.exe"
     return webdriver.Edge(executable_path=driver_path, options=options)
-
 # Data management
 def dataManagement(file, date, status=None):
     try:
@@ -49,7 +46,8 @@ def dataManagement(file, date, status=None):
     return None
 # main script . . .
 def main():
-    file = "leetcodeStreak.json"
+    file = r'<path_of_repo>\leetcodeStreak.json'
+    print(file)
     date = datetime.date.today().isoformat()
     dateData = dataManagement(file, date)
     if dateData is None:
@@ -110,7 +108,7 @@ def main():
             src = iframe.get("src", "No src attribute found")
             iFrame.append(src)
         # opening playground to copy code . . .
-        driver.get(iFrame[0])
+        driver.get(iFrame[-1])
         copyBtn = WebDriverWait(driver, 10).until(
             ec.element_to_be_clickable((By.XPATH,"/html/body/div[1]/div/div[1]/div[2]/button"))
         )
