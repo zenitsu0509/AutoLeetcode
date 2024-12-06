@@ -164,7 +164,8 @@ You can easily modify the script to:
 
 - [Selenium](https://www.selenium.dev/) for browser automation.
 - [BeautifulSoup](https://www.crummy.com/software/BeautifulSoup/) for HTML parsing.
-- [LeetCode](https://leetcode.com/) for the awesome platform!
+- [LeetCode](https://leetcode.com/) solving problem
+- [Qt](https://doc.qt.io/qtforpython-6/) for platform design
 
 ---
 Happy coding, and may your streak stay as unbreakable as your coffee addiction! ☕💻 Keep crushing it and let no bug stand in your way! 💥🚀
