@@ -78,7 +78,7 @@ content = ""
 while retries > 0:
    try:
          solDiv = WebDriverWait(driver, 10).until(
-            ec.presence_of_element_located((By.XPATH, '/html/body/div[1]/div[2]/div/div/div[4]/div/div/div[5]/div/div[2]/div/div[1]/div/div'))
+            ec.presence_of_element_located((By.XPATH, '/html/body/div[1]/div[2]/div/div/div[4]/div/div/div[5]/div/div[2]/div/div[2]/div/div'))
          )
          content = driver.execute_script("return arguments[0].innerHTML;", solDiv)
          if content.strip():  # Break if non-empty content is retrieved
