@@ -166,6 +166,7 @@ You can easily modify the script to:
 - [BeautifulSoup](https://www.crummy.com/software/BeautifulSoup/) for HTML parsing.
 - [LeetCode](https://leetcode.com/) solving problem
 - [Qt](https://doc.qt.io/qtforpython-6/) for platform design
+- [Icecream](https://github.com/gruns/icecream) for code debuging
 
 ---
 Happy coding, and may your streak stay as unbreakable as your coffee addiction! ☕💻 Keep crushing it and let no bug stand in your way! 💥🚀

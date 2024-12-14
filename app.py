@@ -7,6 +7,8 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as ec
 from selenium.webdriver.chrome.options import Options
+from icecream import ic
+ic.configureOutput(includeContext=True)
 
 def batFile():
     mainFile = os.path.join(os.path.abspath(os.getcwd()),"main.py")
@@ -26,7 +28,7 @@ exit
         except:
             pass
     else:
-        print("file exist")
+        ic("file exist")
 def chrome():
     opt = Options()
     opt.add_argument(f"--user-data-dir={os.path.join(os.environ["LOCALAPPDATA"], "Google", "Chrome", "User Data")}")
@@ -64,7 +66,7 @@ def fetchDetails(url):
         details['id'] = id.text
     except Exception as e:
         details['id'] = 'N/A'
-        print(e)
+        ic(e)
     
     # getting name
     try:
@@ -74,7 +76,7 @@ def fetchDetails(url):
         details['name'] = name.text
     except Exception as e:
         details['name'] = 'N/A'
-        print(e)
+        ic(e)
 
     # getting rank
     try:
@@ -84,7 +86,7 @@ def fetchDetails(url):
         details['rank'] = rank.text
     except Exception as e:
         details['rank'] = 'N/A'
-        print(e) 
+        ic(e) 
 
     # getting profile
     try:
@@ -94,7 +96,7 @@ def fetchDetails(url):
         details['profilePic'] = pic.get_attribute('src')
     except Exception as e:
         details['profilePic'] = '#'
-        print(e)
+        ic(e)
     
     # getting countary
     try:
@@ -104,7 +106,7 @@ def fetchDetails(url):
         details['countary'] = countary.text
     except Exception as e:
         details['countary'] = 'N/A'
-        print(e)
+        ic(e)
     
     # getting qns
     try:
@@ -124,11 +126,11 @@ def fetchDetails(url):
                     qnsLevel.append(scores)
             details['qnsCard'] = qnsLevel
         else:
-            print("No content found in qnsCard")
+            ic("No content found in qnsCard")
             
     except Exception as e:
         details['qnsCard'] = [[], [], []]
-        print(e)
+        ic(e)
     
     # top lang
     try:
@@ -149,7 +151,7 @@ def fetchDetails(url):
         details['top3lang'] = langs
     except Exception as e:
         details['top3lang'] = 'N/A'
-        print(f"Error getting top languages: {e}")
+        ic(f"Error getting top languages: {e}")
     driver.quit()
     return details
 def getChart(data):
@@ -421,7 +423,7 @@ if __name__ == "__main__":
             leetcode = json.load(f)
             url = leetcode.get('url', '')
     except Exception as e:
-        print(f"Error reading file: {e}")
+        ic(f"Error reading file: {e}")
     
     if not url:
         url = pymsgbox.prompt("Enter Leetcode Profile URL")
@@ -435,7 +437,7 @@ if __name__ == "__main__":
             try:
                 shutil.copy(bat, dest)
             except Exception as e:
-                print(f"Error copying the batch file: {e}")
+                ic(f"Error copying the batch file: {e}")
             
             leetcode['moved'] = True
             with open(jsonPath, 'w') as f:

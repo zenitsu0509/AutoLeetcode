@@ -2,6 +2,7 @@ import os
 import time
 import json
 import datetime
+from icecream import ic
 from bs4 import BeautifulSoup
 from selenium import webdriver
 from selenium.webdriver.common.by import By
@@ -10,6 +11,7 @@ from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as ec
 from selenium.webdriver.common.action_chains import ActionChains
+ic.configureOutput(includeContext=True)
 # Setting browser driver and data
 def chromeBrowser():
     options = Options()
@@ -37,7 +39,7 @@ def dataManagement(file, date, status=None):
         dateData = {}
     if status is None:
         if date in dateData:
-            print("qns solved . . .")
+            ic("qns solved . . .")
             return None
         return dateData
     dateData[date] = status
@@ -46,8 +48,8 @@ def dataManagement(file, date, status=None):
     return None
 # main script . . .
 def main():
-    file = r'<path_of_repo>\leetcodeStreak.json'
-    print(file)
+    file = r'D:\automatedLeetcode\leetcodeStreak.json'
+    ic(file)
     date = datetime.date.today().isoformat()
     dateData = dataManagement(file, date)
     if dateData is None:
@@ -71,7 +73,7 @@ def main():
                 qnsTab.click()
                 break  
             except Exception as e:
-                print(f"Retrying on qns of the day, Error: {e}")
+                ic(f"Retrying on qns of the day, Error: {e}")
         # switiching the tab, controll given to new tab . . .
         tabs = driver.window_handles
         driver.switch_to.window(tabs[-1])
@@ -85,29 +87,33 @@ def main():
                 driver.execute_script("arguments[0].scrollIntoView(true);", editorialSec)
                 break
             except Exception as e:
-                print(e) 
+                ic(e) 
         # getting playground link . . .
         retries = 5
         content = ""
         while retries > 0:
             try:
                 solDiv = WebDriverWait(driver, 10).until(
-                    ec.presence_of_element_located((By.XPATH, '/html/body/div[1]/div[2]/div/div/div[4]/div/div/div[5]/div/div[2]/div/div[1]/div/div'))
-                )
+                    ec.presence_of_element_located((By.XPATH, '/html/body/div[1]/div[2]/div/div/div[4]/div/div/div[5]/div/div[2]/div/div[2]/div/div'))
+                )                                             #/html/body/div[1]/div[2]/div/div/div[4]/div/div/div[5]/div/div[2]/div/div[2]/div/div
                 content = driver.execute_script("return arguments[0].innerHTML;", solDiv)
                 if content.strip():  # Break if non-empty content is retrieved
+                    ic(content[:100])
                     break
             except Exception as e:
                 retries -= 1
                 time.sleep(2)
         # getting list of all solutions . . .
         soup = BeautifulSoup(content, "html.parser")
+        ic(soup.prettify())
         iFrames = soup.find_all("iframe")
+        ic(iFrames)
         iFrame = []
         for i, iframe in enumerate(iFrames, 1):
             src = iframe.get("src", "No src attribute found")
             iFrame.append(src)
         # opening playground to copy code . . .
+        ic(iFrame)
         driver.get(iFrame[-1])
         copyBtn = WebDriverWait(driver, 10).until(
             ec.element_to_be_clickable((By.XPATH,"/html/body/div[1]/div/div[1]/div[2]/button"))
@@ -132,7 +138,7 @@ def main():
         #saving the data . . .
         dataManagement(file, date, "solved")
     except Exception as e:
-        print(f"Error occurred: {e}")
+        ic(f"Error occurred: {e}")
     finally:
         time.sleep(30)
         driver.quit()
