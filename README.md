@@ -55,22 +55,18 @@ class App(QMainWindow):
 For the current version of **AutoLeetcode**, it is necessary to use **Chrome**. The user must be logged into their **Leetcode** account in **Chrome**. The system will retrieve the user's login credentials from there system from (`C:\Users\<Device_login_name>\AppData\Local\Google\Chrome\User Data`) and continue with the automation process. As its neccessary to kill all background process of chrome for uninterepted and smooth flow `os.system("taskkill /f /im chrome.exe")` kills the **chrome.exe** task 
 ```python
 def chromeBrowser():
-    os.system("taskkill /f /im chrome.exe")
+    try:
+        os.system("taskkill /f /im chrome.exe")
+    except:
+        pass
     options = Options()
     
-    # Set up user data directory
     dataDir = os.path.join(os.environ["LOCALAPPDATA"], "Google", "Chrome", "User Data")
     options.add_argument(f"--user-data-dir={dataDir}")
     options.add_argument("--profile-directory=Default")
     
-    # Add flags to avoid DevToolsActivePort error
-    options.add_argument("--no-sandbox")
-    options.add_argument("--disable-dev-shm-usage")
-    options.add_argument("--remote-debugging-port=9222")
-    
     service = Service(ChromeDriverManager().install())
     
-    # Instantiate the Chrome WebDriver
     return webdriver.Chrome(options=options, service=service)
 ```
 ## 4. **Navigating to "Question of the Day"**

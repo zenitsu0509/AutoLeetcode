@@ -1,3 +1,4 @@
+#____________________________________________________IMPORTS_________________________________________________________________________
 import os
 import time
 import json
@@ -14,25 +15,22 @@ from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.support import expected_conditions as ec
 from selenium.webdriver.common.action_chains import ActionChains
 ic.configureOutput(includeContext=True)
-# Setting browser driver and data
+#______________________________________________________________Browser Setup_________________________________________________________
 def chromeBrowser():
-    os.system("taskkill /f /im chrome.exe")
+    try:
+        os.system("taskkill /f /im chrome.exe")
+    except:
+        pass
     options = Options()
     
-    # Set up user data directory
     dataDir = os.path.join(os.environ["LOCALAPPDATA"], "Google", "Chrome", "User Data")
     options.add_argument(f"--user-data-dir={dataDir}")
     options.add_argument("--profile-directory=Default")
     
-    # Add flags to avoid DevToolsActivePort error
-    options.add_argument("--no-sandbox")
-    options.add_argument("--disable-dev-shm-usage")
-    options.add_argument("--remote-debugging-port=9222")
-    
     service = Service(ChromeDriverManager().install())
     
-    # Instantiate the Chrome WebDriver
     return webdriver.Chrome(options=options, service=service)
+
 def edgeBrowser():
     options = Options()
     options.add_argument("--disable-dev-shm-usage")
@@ -44,7 +42,7 @@ def edgeBrowser():
     options.binary_location = r"C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe"
     driver_path = r"C:\path\to\msedgedriver.exe"
     return webdriver.Edge(executable_path=driver_path, options=options)
-# Data management
+#_____________________________________________________________Data management_________________________________________________________
 def dataManagement(file, date, status=None):
     try:
         with open(file, "r") as f:
@@ -60,7 +58,7 @@ def dataManagement(file, date, status=None):
     with open(file, "w") as f:
         json.dump(dateData, f, indent=4)
     return None
-# main script . . .
+#__________________________________________________________________________main script . . .
 def main():
     file = 'D:\\AutoLeetcode\\leetcodeStreak.json'
     ic(file)
