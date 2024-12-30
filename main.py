@@ -7,18 +7,32 @@ from bs4 import BeautifulSoup
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.support.ui import WebDriverWait
+from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.support import expected_conditions as ec
 from selenium.webdriver.common.action_chains import ActionChains
 ic.configureOutput(includeContext=True)
 # Setting browser driver and data
 def chromeBrowser():
+    os.system("taskkill /f /im chrome.exe")
     options = Options()
+    
+    # Set up user data directory
     dataDir = os.path.join(os.environ["LOCALAPPDATA"], "Google", "Chrome", "User Data")
     options.add_argument(f"--user-data-dir={dataDir}")
     options.add_argument("--profile-directory=Default")
-    return webdriver.Chrome(options=options)
+    
+    # Add flags to avoid DevToolsActivePort error
+    options.add_argument("--no-sandbox")
+    options.add_argument("--disable-dev-shm-usage")
+    options.add_argument("--remote-debugging-port=9222")
+    
+    service = Service(ChromeDriverManager().install())
+    
+    # Instantiate the Chrome WebDriver
+    return webdriver.Chrome(options=options, service=service)
 def edgeBrowser():
     options = Options()
     options.add_argument("--disable-dev-shm-usage")
@@ -48,7 +62,7 @@ def dataManagement(file, date, status=None):
     return None
 # main script . . .
 def main():
-    file = r'D:\automatedLeetcode\leetcodeStreak.json'
+    file = 'D:\\AutoLeetcode\\leetcodeStreak.json'
     ic(file)
     date = datetime.date.today().isoformat()
     dateData = dataManagement(file, date)

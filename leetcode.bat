@@ -1,4 +1,6 @@
+
 @echo off
 REM Execute Python script with unbuffered output
-python -u "main.py"
+python -u "<path of directory>\main.py"
 exit
+    
